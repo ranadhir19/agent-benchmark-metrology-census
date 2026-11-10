@@ -1,0 +1,197 @@
+{
+ "arm_a": {
+  "done": true,
+  "utc": "2026-11-02T05:20:01Z"
+ },
+ "arm_a_B1": {
+  "headline_pair": {
+   "n_shared_tasks_ge2": 163,
+   "pair": "gpt_4 || o1_preview",
+   "runs_in_shared_cells": 3560
+  },
+  "pooled_rho_binary": 0.37670788105674446,
+  "utc": "2026-11-01T05:01:44Z"
+ },
+ "arm_a_B1_binary": {
+  "done": true,
+  "utc": "2026-11-01T05:00:46Z"
+ },
+ "arm_a_B1_continuous": {
+  "done": true,
+  "utc": "2026-11-01T05:01:44Z"
+ },
+ "arm_a_B3": {
+  "headline_pair": {
+   "n_shared_tasks_ge2": 165,
+   "pair": "gpt-4o || sonnet-35-new",
+   "runs_in_shared_cells": 1980
+  },
+  "pooled_rho_binary": 0.9833958400281138,
+  "utc": "2026-11-01T05:01:53Z"
+ },
+ "arm_a_B3_binary": {
+  "done": true,
+  "utc": "2026-11-01T05:01:53Z"
+ },
+ "arm_a_B4": {
+  "headline_pair": {
+   "n_shared_tasks_ge2": 500,
+   "pair": "nano-agent|Devstral-2|temp=0 || nano-agent|Devstral-2|temp=0.2",
+   "runs_in_shared_cells": 9917
+  },
+  "pooled_rho_binary": 0.7133793219461164,
+  "utc": "2026-11-01T05:03:06Z"
+ },
+ "arm_a_B4_binary": {
+  "done": true,
+  "utc": "2026-11-01T05:03:06Z"
+ },
+ "arm_b": {
+  "done": true,
+  "utc": "2026-11-02T05:53:59Z"
+ },
+ "arm_b_B1": {
+  "new_fits": 14,
+  "utc": "2026-11-02T05:53:59Z"
+ },
+ "arm_b_B3": {
+  "new_fits": 0,
+  "utc": "2026-11-02T05:20:03Z"
+ },
+ "arm_b_B4": {
+  "new_fits": 0,
+  "utc": "2026-11-02T05:20:06Z"
+ },
+ "arm_b_summary": {
+  "done": true,
+  "utc": "2026-11-02T05:54:32Z"
+ },
+ "arm_b_summary_B1": {
+  "pooled_rho_B": 0.470859055324818,
+  "utc": "2026-11-02T05:54:29Z"
+ },
+ "arm_b_summary_B3": {
+  "pooled_rho_B": 1.0823040270896231,
+  "utc": "2026-11-02T05:54:30Z"
+ },
+ "arm_b_summary_B4": {
+  "pooled_rho_B": 0.8236693080148348,
+  "utc": "2026-11-02T05:54:32Z"
+ },
+ "ingest": {
+  "benchmarks": [
+   "B1",
+   "B3",
+   "B4"
+  ],
+  "utc": "2026-11-01T04:38:45Z"
+ },
+ "report": {
+  "path": "/home/hatch/workspace/research-orchestration/areas/agent-benchmark-metrology/results/census/CENSUS_RESULTS.md",
+  "utc": "2026-11-02T05:54:48Z"
+ },
+ "tables": {
+  "done": true,
+  "utc": "2026-11-02T05:54:42Z"
+ },
+ "tables_B1": {
+  "falsifier": {
+   "arm_a": {
+    "interval_bca": [
+     0.31541709288323333,
+     0.44264580300938056
+    ],
+    "rho": 0.37670788105674446,
+    "verdict": "SUPPORTED"
+   },
+   "arm_b": {
+    "failed_agents": [
+     "davinci_002",
+     "gpt_3_5_turbo_instruct"
+    ],
+    "interval": [
+     0.45365762057542786,
+     0.48864604232021436
+    ],
+    "misfit_share_primary": 0.0196078431372549,
+    "prior_sensitivity": {
+     "prior_sensitive_flag": true,
+     "rho_shift": 0.0748352099789451
+    },
+    "rho": 0.470859055324818,
+    "sensitivity_values": [
+     0.5456942653037631,
+     0.47086321600529163
+    ],
+    "verdict": "SUPPORTED"
+   }
+  },
+  "utc": "2026-11-02T05:54:41Z"
+ },
+ "tables_B3": {
+  "falsifier": {
+   "arm_a": {
+    "interval_bca": [
+     0.7798453507351945,
+     1.2238827538398571
+    ],
+    "rho": 0.9833958400281138,
+    "verdict": "INDETERMINATE"
+   },
+   "arm_b": {
+    "failed_agents": [],
+    "interval": [
+     0.9200163180774009,
+     1.2740641542148856
+    ],
+    "misfit_share_primary": 0.0,
+    "prior_sensitivity": {
+     "prior_sensitive_flag": false,
+     "rho_shift": 0.04992733270937211
+    },
+    "rho": 1.0823040270896231,
+    "sensitivity_values": [
+     1.032376694380251,
+     1.0823040270896231
+    ],
+    "verdict": "INDETERMINATE"
+   }
+  },
+  "utc": "2026-11-02T05:54:41Z"
+ },
+ "tables_B4": {
+  "falsifier": {
+   "arm_a": {
+    "interval_bca": [
+     0.635500392913644,
+     0.7843516139943334
+    ],
+    "rho": 0.7133793219461164,
+    "verdict": "SUPPORTED"
+   },
+   "arm_b": {
+    "failed_agents": [
+     "nano-agent|Devstral-2|temp=0",
+     "nano-agent|Devstral-2|temp=0.2",
+     "nano-agent|Qwen3-32B|temp=0"
+    ],
+    "interval": [
+     0.7959786818177715,
+     0.852607605852427
+    ],
+    "misfit_share_primary": 0.0,
+    "prior_sensitivity": {
+     "prior_sensitive_flag": false,
+     "rho_shift": 0.0014787696206738365
+    },
+    "rho": 0.8236693080148348,
+    "sensitivity_values": [
+     0.8251480776355087,
+     0.8428089466662454
+    ],
+    "verdict": "INDETERMINATE (fit failure, SS6.4)"
+   }
+  },
+  "utc": "2026-11-02T05:54:42Z"
+ }
+}

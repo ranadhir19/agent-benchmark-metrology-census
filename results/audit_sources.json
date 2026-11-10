@@ -1,0 +1,274 @@
+{
+ "B1": [],
+ "B3": [
+  {
+   "agent_1": "gpt-4o",
+   "agent_2": "sonnet-35-new",
+   "gap": 0.088,
+   "T": 115,
+   "R1": 4,
+   "R2": 8,
+   "task_prefix": "retail:",
+   "source": "tau-bench official leaderboard (sierra-research/tau-bench README, fetched 2026-11-01): pass^1 retail gpt-4o 0.604, claude-3-5-sonnet-20241022 0.692. The leaderboard values equal the census corpus's own pass^1 (0.6043 / 0.6924), i.e. they are computed from these trajectories; design actually used: T=115 tasks, 4 trials (gpt-4o) / 8 trials (sonnet). The paper's Table 2 (arXiv:2406.12045) reports different gpt-4o values (61.2) from an earlier run set and predates sonnet-35-new; the leaderboard is the benchmark's official source for this corpus.",
+   "contrast": "tau-retail: gpt-4o vs claude-3.5-sonnet (new)"
+  },
+  {
+   "agent_1": "gpt-4o",
+   "agent_2": "sonnet-35-new",
+   "gap": 0.04,
+   "T": 50,
+   "R1": 4,
+   "R2": 8,
+   "task_prefix": "airline:",
+   "source": "tau-bench official leaderboard (sierra-research/tau-bench README, fetched 2026-11-01): pass^1 airline gpt-4o 0.420, claude-3-5-sonnet-20241022 0.460; equal to the census corpus's own pass^1 (0.4200 / 0.4600). Design actually used: T=50 tasks, 4 trials (gpt-4o) / 8 trials (sonnet).",
+   "contrast": "tau-airline: gpt-4o vs claude-3.5-sonnet (new)"
+  }
+ ],
+ "B4": [
+  {
+   "agent_1": "nano-agent|Qwen3-32B|temp=0.6",
+   "agent_2": "nano-agent|Qwen3-32B|temp=0",
+   "gap": 0.0,
+   "gap_points": 0.0,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "nano-agent: Qwen3-32B default-temp vs temp-0"
+  },
+  {
+   "agent_1": "nano-agent|DeepSWE-preview|temp=1",
+   "agent_2": "nano-agent|DeepSWE-preview|temp=0",
+   "gap": 0.11,
+   "gap_points": 11.0,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "nano-agent: DeepSWE-preview default-temp vs temp-0"
+  },
+  {
+   "agent_1": "nano-agent|Devstral-2|temp=0.2",
+   "agent_2": "nano-agent|Devstral-2|temp=0",
+   "gap": 0.003,
+   "gap_points": 0.29999999999999716,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "nano-agent: Devstral-2 default-temp vs temp-0"
+  },
+  {
+   "agent_1": "nano-agent|Qwen3-32B|temp=0.6",
+   "agent_2": "nano-agent|DeepSWE-preview|temp=1",
+   "gap": 0.15,
+   "gap_points": 15.0,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "nano-agent: model pair at default temps"
+  },
+  {
+   "agent_1": "nano-agent|Qwen3-32B|temp=0.6",
+   "agent_2": "nano-agent|Devstral-2|temp=0.2",
+   "gap": 0.471,
+   "gap_points": 47.1,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "nano-agent: model pair at default temps"
+  },
+  {
+   "agent_1": "nano-agent|DeepSWE-preview|temp=1",
+   "agent_2": "nano-agent|Devstral-2|temp=0.2",
+   "gap": 0.321,
+   "gap_points": 32.1,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "nano-agent: model pair at default temps"
+  },
+  {
+   "agent_1": "nano-agent|Qwen3-32B|temp=0",
+   "agent_2": "nano-agent|DeepSWE-preview|temp=0",
+   "gap": 0.04,
+   "gap_points": 4.0,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "nano-agent: model pair at temp0 temps"
+  },
+  {
+   "agent_1": "nano-agent|Qwen3-32B|temp=0",
+   "agent_2": "nano-agent|Devstral-2|temp=0",
+   "gap": 0.474,
+   "gap_points": 47.4,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "nano-agent: model pair at temp0 temps"
+  },
+  {
+   "agent_1": "nano-agent|DeepSWE-preview|temp=0",
+   "agent_2": "nano-agent|Devstral-2|temp=0",
+   "gap": 0.434,
+   "gap_points": 43.4,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "nano-agent: model pair at temp0 temps"
+  },
+  {
+   "agent_1": "r2e-gym|Qwen3-32B|temp=0.6",
+   "agent_2": "r2e-gym|Qwen3-32B|temp=0",
+   "gap": 0.016,
+   "gap_points": 1.5999999999999979,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "r2e-gym: Qwen3-32B default-temp vs temp-0"
+  },
+  {
+   "agent_1": "r2e-gym|DeepSWE-preview|temp=1",
+   "agent_2": "r2e-gym|DeepSWE-preview|temp=0",
+   "gap": 0.152,
+   "gap_points": 15.2,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "r2e-gym: DeepSWE-preview default-temp vs temp-0"
+  },
+  {
+   "agent_1": "r2e-gym|Devstral-2|temp=0.2",
+   "agent_2": "r2e-gym|Devstral-2|temp=0",
+   "gap": 0.005,
+   "gap_points": 0.5,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "r2e-gym: Devstral-2 default-temp vs temp-0"
+  },
+  {
+   "agent_1": "r2e-gym|Qwen3-32B|temp=0.6",
+   "agent_2": "r2e-gym|DeepSWE-preview|temp=1",
+   "gap": 0.105,
+   "gap_points": 10.5,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "r2e-gym: model pair at default temps"
+  },
+  {
+   "agent_1": "r2e-gym|Qwen3-32B|temp=0.6",
+   "agent_2": "r2e-gym|Devstral-2|temp=0.2",
+   "gap": 0.11,
+   "gap_points": 11.0,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "r2e-gym: model pair at default temps"
+  },
+  {
+   "agent_1": "r2e-gym|DeepSWE-preview|temp=1",
+   "agent_2": "r2e-gym|Devstral-2|temp=0.2",
+   "gap": 0.005,
+   "gap_points": 0.5,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "r2e-gym: model pair at default temps"
+  },
+  {
+   "agent_1": "r2e-gym|Qwen3-32B|temp=0",
+   "agent_2": "r2e-gym|DeepSWE-preview|temp=0",
+   "gap": 0.031,
+   "gap_points": 3.1000000000000014,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "r2e-gym: model pair at temp0 temps"
+  },
+  {
+   "agent_1": "r2e-gym|Qwen3-32B|temp=0",
+   "agent_2": "r2e-gym|Devstral-2|temp=0",
+   "gap": 0.131,
+   "gap_points": 13.099999999999998,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "r2e-gym: model pair at temp0 temps"
+  },
+  {
+   "agent_1": "r2e-gym|DeepSWE-preview|temp=0",
+   "agent_2": "r2e-gym|Devstral-2|temp=0",
+   "gap": 0.162,
+   "gap_points": 16.2,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "r2e-gym: model pair at temp0 temps"
+  },
+  {
+   "agent_1": "nano-agent|Qwen3-32B|temp=0.6",
+   "agent_2": "r2e-gym|Qwen3-32B|temp=0.6",
+   "gap": 0.075,
+   "gap_points": 7.5,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "cross-scaffold: Qwen3-32B at default temp"
+  },
+  {
+   "agent_1": "nano-agent|Qwen3-32B|temp=0",
+   "agent_2": "r2e-gym|Qwen3-32B|temp=0",
+   "gap": 0.059,
+   "gap_points": 5.900000000000002,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "cross-scaffold: Qwen3-32B at temp 0"
+  },
+  {
+   "agent_1": "nano-agent|DeepSWE-preview|temp=1",
+   "agent_2": "r2e-gym|DeepSWE-preview|temp=1",
+   "gap": 0.03,
+   "gap_points": 3.0,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "cross-scaffold: DeepSWE-preview at default temp"
+  },
+  {
+   "agent_1": "nano-agent|DeepSWE-preview|temp=0",
+   "agent_2": "r2e-gym|DeepSWE-preview|temp=0",
+   "gap": 0.012,
+   "gap_points": 1.1999999999999993,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "cross-scaffold: DeepSWE-preview at temp 0"
+  },
+  {
+   "agent_1": "nano-agent|Devstral-2|temp=0.2",
+   "agent_2": "r2e-gym|Devstral-2|temp=0.2",
+   "gap": 0.286,
+   "gap_points": 28.6,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "cross-scaffold: Devstral-2 at default temp"
+  },
+  {
+   "agent_1": "nano-agent|Devstral-2|temp=0",
+   "agent_2": "r2e-gym|Devstral-2|temp=0",
+   "gap": 0.284,
+   "gap_points": 28.4,
+   "T": 500,
+   "R": 10,
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0).",
+   "contrast": "cross-scaffold: Devstral-2 at temp 0"
+  }
+ ],
+ "_coverage": {
+  "B1": "Zero audit rows. No pairwise gap could be sourced to METR's own publications or an official leaderboard with BOTH a numeric gap value and the (T, R) of the design actually used: METR's publications report 50%-time-horizons and difficulty-bucketed success rates (HCAST paper, arXiv:2503.17354; time-horizon paper, arXiv:2503.14499), not overall pairwise success-rate gaps at a stated design. No gap was reconstructed from the census run table (SS3.5 forbids it).",
+  "B3": "2 rows: the only agent pair in the corpus, both domains, from the benchmark's official leaderboard.",
+  "B4": "24 rows covering the paper's own contrast structure (temperature contrasts, model pairs within scaffold, cross-scaffold pairs) of the 66 unordered config pairs."
+ }
+}

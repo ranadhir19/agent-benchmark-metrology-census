@@ -1,0 +1,146 @@
+{
+ "audit": [],
+ "benchmark": "B1",
+ "design_table_arm_a": {
+  "T_shared": 163,
+  "headline_pair": {
+   "n_shared_tasks_ge2": 163,
+   "pair": "gpt_4 || o1_preview",
+   "runs_in_shared_cells": 3560
+  },
+  "rows": {
+   "R=1": {
+    "mde_normal": 0.10450291131795778,
+    "mde_t": 0.10513614659218753
+   },
+   "R=2": {
+    "mde_normal": 0.08323135151918447,
+    "mde_t": 0.08373569180060884
+   },
+   "R=4": {
+    "mde_normal": 0.07021935329095962,
+    "mde_t": 0.07064484738367584
+   },
+   "R=8": {
+    "mde_normal": 0.06270891026836518,
+    "mde_t": 0.0630888948399875
+   },
+   "R=actual(10.92)": {
+    "mde_normal": 0.06054281867133846,
+    "mde_t": 0.06090967781335167
+   },
+   "arm": "A",
+   "pair_components": {
+    "run_var_sum": 0.16586425567486715,
+    "task_diff_var": 0.06093243270604395,
+    "task_term_paired": 0.06093243270604395
+   },
+   "required_runs_delta=0.02": {
+    "normal": null,
+    "required_tasks_at_R8_normal": 1603,
+    "required_tasks_at_R8_t": 1622,
+    "t": null
+   },
+   "required_runs_delta=0.05": {
+    "normal": null,
+    "required_tasks_at_R8_normal": 257,
+    "required_tasks_at_R8_t": 260,
+    "t": null
+   },
+   "required_runs_delta=0.1": {
+    "normal": 2,
+    "t": 2
+   }
+  }
+ },
+ "design_table_arm_b": {
+  "T_shared": 163,
+  "headline_pair": {
+   "n_shared_tasks_ge2": 163,
+   "pair": "gpt_4 || o1_preview",
+   "runs_in_shared_cells": 3560
+  },
+  "note": "Arm B has no cross-agent paired estimand in the frozen model (agents fitted independently); its MDE uses the unpaired construction with Arm B components (SS3.4 unpaired variant).",
+  "rows": {
+   "R=1": {
+    "mde_normal": 0.13555530843676608,
+    "mde_t": 0.13637670567660073
+   },
+   "R=2": {
+    "mde_normal": 0.12058457383676625,
+    "mde_t": 0.12131525592703911
+   },
+   "R=4": {
+    "mde_normal": 0.11235363077532655,
+    "mde_t": 0.11303443747532611
+   },
+   "R=8": {
+    "mde_normal": 0.10800318420722764,
+    "mde_t": 0.1086576293811144
+   },
+   "arm": "B-unpaired",
+   "pair_components": {
+    "run_var_sum": 0.15926862926370772,
+    "task_diff_var": null,
+    "task_term_paired": 0.22233543266251776
+   },
+   "required_runs_delta=0.02": {
+    "normal": null,
+    "required_tasks_at_R8_normal": 4754,
+    "required_tasks_at_R8_t": 4812,
+    "t": null
+   },
+   "required_runs_delta=0.05": {
+    "normal": null,
+    "required_tasks_at_R8_normal": 761,
+    "required_tasks_at_R8_t": 770,
+    "t": null
+   },
+   "required_runs_delta=0.1": {
+    "normal": null,
+    "required_tasks_at_R8_normal": 191,
+    "required_tasks_at_R8_t": 193,
+    "t": null
+   }
+  }
+ },
+ "falsifier": {
+  "arm_a": {
+   "interval_bca": [
+    0.31541709288323333,
+    0.44264580300938056
+   ],
+   "rho": 0.37670788105674446,
+   "verdict": "SUPPORTED"
+  },
+  "arm_b": {
+   "failed_agents": [
+    "davinci_002",
+    "gpt_3_5_turbo_instruct"
+   ],
+   "interval": [
+    0.45365762057542786,
+    0.48864604232021436
+   ],
+   "misfit_share_primary": 0.0196078431372549,
+   "prior_sensitivity": {
+    "prior_sensitive_flag": true,
+    "rho_shift": 0.0748352099789451
+   },
+   "rho": 0.470859055324818,
+   "sensitivity_values": [
+    0.5456942653037631,
+    0.47086321600529163
+   ],
+   "verdict": "SUPPORTED"
+  }
+ },
+ "pooled_rho": {
+  "arm_a": 0.37670788105674446,
+  "arm_b": 0.470859055324818,
+  "arm_b_interval": [
+   0.45365762057542786,
+   0.48864604232021436
+  ]
+ }
+}

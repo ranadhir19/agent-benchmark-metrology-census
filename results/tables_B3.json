@@ -1,0 +1,192 @@
+{
+ "audit": [
+  {
+   "R1": 4,
+   "R2": 8,
+   "T": 115,
+   "agent_1": "gpt-4o",
+   "agent_2": "sonnet-35-new",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": false,
+   "classification": "BELOW",
+   "classification_arm_b": "BELOW",
+   "contrast": "tau-retail: gpt-4o vs claude-3.5-sonnet (new)",
+   "design_note": "asymmetric design R1=4, R2=8 (per-agent run variances)",
+   "gap": 0.088,
+   "mde_arm_a_at_design": 0.09270693181623858,
+   "mde_arm_b_unpaired_at_design": 0.13828064307496188,
+   "pair_T_in_census": 115,
+   "pair_components": {
+    "run_var_1": 0.11304347826086955,
+    "run_var_2": 0.11630434782608694,
+    "task_diff_var": 0.08312684734935162
+   },
+   "source": "tau-bench official leaderboard (sierra-research/tau-bench README, fetched 2026-11-01): pass^1 retail gpt-4o 0.604, claude-3-5-sonnet-20241022 0.692. The leaderboard values equal the census corpus's own pass^1 (0.6043 / 0.6924), i.e. they are computed from these trajectories; design actually used: T=115 tasks, 4 trials (gpt-4o) / 8 trials (sonnet). The paper's Table 2 (arXiv:2406.12045) reports different gpt-4o values (61.2) from an earlier run set and predates sonnet-35-new; the leaderboard is the benchmark's official source for this corpus.",
+   "task_prefix": "retail:"
+  },
+  {
+   "R1": 4,
+   "R2": 8,
+   "T": 50,
+   "agent_1": "gpt-4o",
+   "agent_2": "sonnet-35-new",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": false,
+   "classification": "BELOW",
+   "classification_arm_b": "BELOW",
+   "contrast": "tau-airline: gpt-4o vs claude-3.5-sonnet (new)",
+   "design_note": "asymmetric design R1=4, R2=8 (per-agent run variances)",
+   "gap": 0.04,
+   "mde_arm_a_at_design": 0.14118386649575335,
+   "mde_arm_b_unpaired_at_design": 0.2097129785521571,
+   "pair_T_in_census": 50,
+   "pair_components": {
+    "run_var_1": 0.14666666666666664,
+    "run_var_2": 0.13428571428571429,
+    "task_diff_var": 0.07352678571428571
+   },
+   "source": "tau-bench official leaderboard (sierra-research/tau-bench README, fetched 2026-11-01): pass^1 airline gpt-4o 0.420, claude-3-5-sonnet-20241022 0.460; equal to the census corpus's own pass^1 (0.4200 / 0.4600). Design actually used: T=50 tasks, 4 trials (gpt-4o) / 8 trials (sonnet).",
+   "task_prefix": "airline:"
+  }
+ ],
+ "benchmark": "B3",
+ "design_table_arm_a": {
+  "T_shared": 165,
+  "headline_pair": {
+   "n_shared_tasks_ge2": 165,
+   "pair": "gpt-4o || sonnet-35-new",
+   "runs_in_shared_cells": 1980
+  },
+  "rows": {
+   "R=1": {
+    "mde_normal": 0.12433517783619126,
+    "mde_t": 0.1250793376418343
+   },
+   "R=2": {
+    "mde_normal": 0.09814469454510599,
+    "mde_t": 0.09873210140846209
+   },
+   "R=4": {
+    "mde_normal": 0.08196922213397893,
+    "mde_t": 0.0824598170040188
+   },
+   "R=8": {
+    "mde_normal": 0.07254129535787388,
+    "mde_t": 0.0729754630423061
+   },
+   "R=actual(6.00)": {
+    "mde_normal": 0.07581431800050738,
+    "mde_t": 0.07626807508784227
+   },
+   "arm": "A",
+   "pair_components": {
+    "run_var_sum": 0.24498556998556992,
+    "task_diff_var": 0.08000017322616408,
+    "task_term_paired": 0.08000017322616408
+   },
+   "required_runs_delta=0.02": {
+    "normal": null,
+    "required_tasks_at_R8_normal": 2171,
+    "required_tasks_at_R8_t": 2197,
+    "t": null
+   },
+   "required_runs_delta=0.05": {
+    "normal": null,
+    "required_tasks_at_R8_normal": 348,
+    "required_tasks_at_R8_t": 352,
+    "t": null
+   },
+   "required_runs_delta=0.1": {
+    "normal": 2,
+    "t": 2
+   }
+  }
+ },
+ "design_table_arm_b": {
+  "T_shared": 165,
+  "headline_pair": {
+   "n_shared_tasks_ge2": 165,
+   "pair": "gpt-4o || sonnet-35-new",
+   "runs_in_shared_cells": 1980
+  },
+  "note": "Arm B has no cross-agent paired estimand in the frozen model (agents fitted independently); its MDE uses the unpaired construction with Arm B components (SS3.4 unpaired variant).",
+  "rows": {
+   "R=1": {
+    "mde_normal": 0.15171509026040952,
+    "mde_t": 0.15262312187339394
+   },
+   "R=2": {
+    "mde_normal": 0.13056162626464402,
+    "mde_t": 0.13134305205351882
+   },
+   "R=4": {
+    "mde_normal": 0.11857813066894236,
+    "mde_t": 0.11928783390987364
+   },
+   "R=8": {
+    "mde_normal": 0.1121070492117996,
+    "mde_t": 0.11277802231373683
+   },
+   "arm": "B-unpaired",
+   "pair_components": {
+    "run_var_sum": 0.25105149848697106,
+    "task_diff_var": null,
+    "task_term_paired": 0.23282422004121647
+   },
+   "required_runs_delta=0.02": {
+    "normal": null,
+    "required_tasks_at_R8_normal": 5185,
+    "required_tasks_at_R8_t": 5247,
+    "t": null
+   },
+   "required_runs_delta=0.05": {
+    "normal": null,
+    "required_tasks_at_R8_normal": 830,
+    "required_tasks_at_R8_t": 840,
+    "t": null
+   },
+   "required_runs_delta=0.1": {
+    "normal": null,
+    "required_tasks_at_R8_normal": 208,
+    "required_tasks_at_R8_t": 210,
+    "t": null
+   }
+  }
+ },
+ "falsifier": {
+  "arm_a": {
+   "interval_bca": [
+    0.7798453507351945,
+    1.2238827538398571
+   ],
+   "rho": 0.9833958400281138,
+   "verdict": "INDETERMINATE"
+  },
+  "arm_b": {
+   "failed_agents": [],
+   "interval": [
+    0.9200163180774009,
+    1.2740641542148856
+   ],
+   "misfit_share_primary": 0.0,
+   "prior_sensitivity": {
+    "prior_sensitive_flag": false,
+    "rho_shift": 0.04992733270937211
+   },
+   "rho": 1.0823040270896231,
+   "sensitivity_values": [
+    1.032376694380251,
+    1.0823040270896231
+   ],
+   "verdict": "INDETERMINATE"
+  }
+ },
+ "pooled_rho": {
+  "arm_a": 0.9833958400281138,
+  "arm_b": 1.0823040270896231,
+  "arm_b_interval": [
+   0.9200163180774009,
+   1.2740641542148856
+  ]
+ }
+}

@@ -1,0 +1,694 @@
+{
+ "audit": [
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "nano-agent|Qwen3-32B|temp=0.6",
+   "agent_2": "nano-agent|Qwen3-32B|temp=0",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": false,
+   "classification": "BELOW",
+   "classification_arm_b": "BELOW",
+   "contrast": "nano-agent: Qwen3-32B default-temp vs temp-0",
+   "design_note": "symmetric design R=10",
+   "gap": 0.0,
+   "gap_points": 0.0,
+   "mde_arm_a_at_design": 0.014834796251962629,
+   "mde_arm_b_unpaired_at_design": 0.054380166840312896,
+   "pair_T_in_census": 484,
+   "pair_components": {
+    "run_var_1": 0.05910668662897663,
+    "run_var_2": 0.061060252902295935,
+    "task_diff_var": 0.002002579324442916
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  },
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "nano-agent|DeepSWE-preview|temp=1",
+   "agent_2": "nano-agent|DeepSWE-preview|temp=0",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": false,
+   "classification": "ABOVE",
+   "classification_arm_b": "ABOVE",
+   "contrast": "nano-agent: DeepSWE-preview default-temp vs temp-0",
+   "design_note": "symmetric design R=10",
+   "gap": 0.11,
+   "gap_points": 11.0,
+   "mde_arm_a_at_design": 0.030000715586101838,
+   "mde_arm_b_unpaired_at_design": 0.06343083811760655,
+   "pair_T_in_census": 463,
+   "pair_components": {
+    "run_var_1": 0.08084934799097146,
+    "run_var_2": 0.10113137058101929,
+    "task_diff_var": 0.039137685992377325
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  },
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "nano-agent|Devstral-2|temp=0.2",
+   "agent_2": "nano-agent|Devstral-2|temp=0",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": false,
+   "classification": "BELOW",
+   "classification_arm_b": "BELOW",
+   "contrast": "nano-agent: Devstral-2 default-temp vs temp-0",
+   "design_note": "symmetric design R=10",
+   "gap": 0.003,
+   "gap_points": 0.29999999999999716,
+   "mde_arm_a_at_design": 0.015525540993680774,
+   "mde_arm_b_unpaired_at_design": 0.07289535940073587,
+   "pair_T_in_census": 500,
+   "pair_components": {
+    "run_var_1": 0.06778089517510452,
+    "run_var_2": 0.06545546436064716,
+    "task_diff_var": 0.00203157595594022
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  },
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "nano-agent|Qwen3-32B|temp=0.6",
+   "agent_2": "nano-agent|DeepSWE-preview|temp=1",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": false,
+   "classification": "ABOVE",
+   "classification_arm_b": "ABOVE",
+   "contrast": "nano-agent: model pair at default temps",
+   "design_note": "symmetric design R=10",
+   "gap": 0.15,
+   "gap_points": 15.0,
+   "mde_arm_a_at_design": 0.03306726853483904,
+   "mde_arm_b_unpaired_at_design": 0.05991431139368215,
+   "pair_T_in_census": 483,
+   "pair_components": {
+    "run_var_1": 0.09930408153055609,
+    "run_var_2": 0.060726659941132695,
+    "task_diff_var": 0.05365299686955922
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  },
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "nano-agent|Qwen3-32B|temp=0.6",
+   "agent_2": "nano-agent|Devstral-2|temp=0.2",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": false,
+   "classification": "ABOVE",
+   "classification_arm_b": "ABOVE",
+   "contrast": "nano-agent: model pair at default temps",
+   "design_note": "symmetric design R=10",
+   "gap": 0.471,
+   "gap_points": 47.1,
+   "mde_arm_a_at_design": 0.04920104630749513,
+   "mde_arm_b_unpaired_at_design": 0.06449769411292211,
+   "pair_T_in_census": 487,
+   "pair_components": {
+    "run_var_1": 0.06409368615432973,
+    "run_var_2": 0.06116654306838355,
+    "task_diff_var": 0.1416834336934526
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  },
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "nano-agent|DeepSWE-preview|temp=1",
+   "agent_2": "nano-agent|Devstral-2|temp=0.2",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": false,
+   "classification": "ABOVE",
+   "classification_arm_b": "ABOVE",
+   "contrast": "nano-agent: model pair at default temps",
+   "design_note": "symmetric design R=10",
+   "gap": 0.321,
+   "gap_points": 32.1,
+   "mde_arm_a_at_design": 0.04140093430398097,
+   "mde_arm_b_unpaired_at_design": 0.06932939551363335,
+   "pair_T_in_census": 496,
+   "pair_components": {
+    "run_var_1": 0.0979478756939214,
+    "run_var_2": 0.06598568278398169,
+    "task_diff_var": 0.09279658075815608
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  },
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "nano-agent|Qwen3-32B|temp=0",
+   "agent_2": "nano-agent|DeepSWE-preview|temp=0",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": true,
+   "classification": "ABOVE",
+   "classification_arm_b": "BELOW",
+   "contrast": "nano-agent: model pair at temp0 temps",
+   "design_note": "symmetric design R=10",
+   "gap": 0.04,
+   "gap_points": 4.0,
+   "mde_arm_a_at_design": 0.02146051494243658,
+   "mde_arm_b_unpaired_at_design": 0.05823185605923242,
+   "pair_T_in_census": 466,
+   "pair_components": {
+    "run_var_1": 0.08112528912700684,
+    "run_var_2": 0.06025576172848023,
+    "task_diff_var": 0.015200712502585584
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  },
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "nano-agent|Qwen3-32B|temp=0",
+   "agent_2": "nano-agent|Devstral-2|temp=0",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": false,
+   "classification": "ABOVE",
+   "classification_arm_b": "ABOVE",
+   "contrast": "nano-agent: model pair at temp0 temps",
+   "design_note": "symmetric design R=10",
+   "gap": 0.474,
+   "gap_points": 47.4,
+   "mde_arm_a_at_design": 0.049210124880236725,
+   "mde_arm_b_unpaired_at_design": 0.06411695112728497,
+   "pair_T_in_census": 489,
+   "pair_components": {
+    "run_var_1": 0.06693192911871726,
+    "run_var_2": 0.058803150889985625,
+    "task_diff_var": 0.14169286329608533
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  },
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "nano-agent|DeepSWE-preview|temp=0",
+   "agent_2": "nano-agent|Devstral-2|temp=0",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": false,
+   "classification": "ABOVE",
+   "classification_arm_b": "ABOVE",
+   "contrast": "nano-agent: model pair at temp0 temps",
+   "design_note": "symmetric design R=10",
+   "gap": 0.434,
+   "gap_points": 43.4,
+   "mde_arm_a_at_design": 0.04776858235138906,
+   "mde_arm_b_unpaired_at_design": 0.0673100257330114,
+   "pair_T_in_census": 466,
+   "pair_components": {
+    "run_var_1": 0.08112528912700684,
+    "run_var_2": 0.0661237605138453,
+    "task_diff_var": 0.13063580491374754
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  },
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "r2e-gym|Qwen3-32B|temp=0.6",
+   "agent_2": "r2e-gym|Qwen3-32B|temp=0",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": false,
+   "classification": "BELOW",
+   "classification_arm_b": "BELOW",
+   "contrast": "r2e-gym: Qwen3-32B default-temp vs temp-0",
+   "design_note": "symmetric design R=10",
+   "gap": 0.016,
+   "gap_points": 1.5999999999999979,
+   "mde_arm_a_at_design": 0.019351838393959975,
+   "mde_arm_b_unpaired_at_design": 0.05790703016367964,
+   "pair_T_in_census": 497,
+   "pair_components": {
+    "run_var_1": 0.09177484068916687,
+    "run_var_2": 0.09180137978894945,
+    "task_diff_var": 0.005498881166720062
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  },
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "r2e-gym|DeepSWE-preview|temp=1",
+   "agent_2": "r2e-gym|DeepSWE-preview|temp=0",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": false,
+   "classification": "ABOVE",
+   "classification_arm_b": "ABOVE",
+   "contrast": "r2e-gym: DeepSWE-preview default-temp vs temp-0",
+   "design_note": "symmetric design R=10",
+   "gap": 0.152,
+   "gap_points": 15.2,
+   "mde_arm_a_at_design": 0.032983757513087436,
+   "mde_arm_b_unpaired_at_design": 0.06304139379429413,
+   "pair_T_in_census": 474,
+   "pair_components": {
+    "run_var_1": 0.07535143823181598,
+    "run_var_2": 0.09370272113740047,
+    "task_diff_var": 0.05239926807556529
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  },
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "r2e-gym|Devstral-2|temp=0.2",
+   "agent_2": "r2e-gym|Devstral-2|temp=0",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": false,
+   "classification": "BELOW",
+   "classification_arm_b": "BELOW",
+   "contrast": "r2e-gym: Devstral-2 default-temp vs temp-0",
+   "design_note": "symmetric design R=10",
+   "gap": 0.005,
+   "gap_points": 0.5,
+   "mde_arm_a_at_design": 0.020187528646670005,
+   "mde_arm_b_unpaired_at_design": 0.06387925951351871,
+   "pair_T_in_census": 494,
+   "pair_components": {
+    "run_var_1": 0.11774637445490056,
+    "run_var_2": 0.11799169708381105,
+    "task_diff_var": 0.002387624709877436
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  },
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "r2e-gym|Qwen3-32B|temp=0.6",
+   "agent_2": "r2e-gym|DeepSWE-preview|temp=1",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": false,
+   "classification": "ABOVE",
+   "classification_arm_b": "ABOVE",
+   "contrast": "r2e-gym: model pair at default temps",
+   "design_note": "symmetric design R=10",
+   "gap": 0.105,
+   "gap_points": 10.5,
+   "mde_arm_a_at_design": 0.02300991359016081,
+   "mde_arm_b_unpaired_at_design": 0.06280145349333813,
+   "pair_T_in_census": 498,
+   "pair_components": {
+    "run_var_1": 0.09175369908155108,
+    "run_var_2": 0.09162464985994398,
+    "task_diff_var": 0.01539029837750746
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  },
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "r2e-gym|Qwen3-32B|temp=0.6",
+   "agent_2": "r2e-gym|Devstral-2|temp=0.2",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": false,
+   "classification": "ABOVE",
+   "classification_arm_b": "ABOVE",
+   "contrast": "r2e-gym: model pair at default temps",
+   "design_note": "symmetric design R=10",
+   "gap": 0.11,
+   "gap_points": 11.0,
+   "mde_arm_a_at_design": 0.03608802033174465,
+   "mde_arm_b_unpaired_at_design": 0.060714060603482355,
+   "pair_T_in_census": 495,
+   "pair_components": {
+    "run_var_1": 0.1179135568870668,
+    "run_var_2": 0.09176608654654285,
+    "task_diff_var": 0.061995799629537975
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  },
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "r2e-gym|DeepSWE-preview|temp=1",
+   "agent_2": "r2e-gym|Devstral-2|temp=0.2",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": false,
+   "classification": "BELOW",
+   "classification_arm_b": "BELOW",
+   "contrast": "r2e-gym: model pair at default temps",
+   "design_note": "symmetric design R=10",
+   "gap": 0.005,
+   "gap_points": 0.5,
+   "mde_arm_a_at_design": 0.03587928767203677,
+   "mde_arm_b_unpaired_at_design": 0.0655697290874832,
+   "pair_T_in_census": 495,
+   "pair_components": {
+    "run_var_1": 0.09174849395118267,
+    "run_var_2": 0.1179135568870668,
+    "task_diff_var": 0.061040611648189094
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  },
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "r2e-gym|Qwen3-32B|temp=0",
+   "agent_2": "r2e-gym|DeepSWE-preview|temp=0",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": true,
+   "classification": "ABOVE",
+   "classification_arm_b": "BELOW",
+   "contrast": "r2e-gym: model pair at temp0 temps",
+   "design_note": "symmetric design R=10",
+   "gap": 0.031,
+   "gap_points": 3.1000000000000014,
+   "mde_arm_a_at_design": 0.026594892696253668,
+   "mde_arm_b_unpaired_at_design": 0.05816716352916531,
+   "pair_T_in_census": 473,
+   "pair_components": {
+    "run_var_1": 0.07545040255836159,
+    "run_var_2": 0.09481617647058824,
+    "task_diff_var": 0.028029983392673454
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  },
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "r2e-gym|Qwen3-32B|temp=0",
+   "agent_2": "r2e-gym|Devstral-2|temp=0",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": false,
+   "classification": "ABOVE",
+   "classification_arm_b": "ABOVE",
+   "contrast": "r2e-gym: model pair at temp0 temps",
+   "design_note": "symmetric design R=10",
+   "gap": 0.131,
+   "gap_points": 13.099999999999998,
+   "mde_arm_a_at_design": 0.039634292764042414,
+   "mde_arm_b_unpaired_at_design": 0.061217536567632694,
+   "pair_T_in_census": 494,
+   "pair_components": {
+    "run_var_1": 0.11737660936690064,
+    "run_var_2": 0.09236342042755345,
+    "task_diff_var": 0.07909614818054675
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  },
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "r2e-gym|DeepSWE-preview|temp=0",
+   "agent_2": "r2e-gym|Devstral-2|temp=0",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": false,
+   "classification": "ABOVE",
+   "classification_arm_b": "ABOVE",
+   "contrast": "r2e-gym: model pair at temp0 temps",
+   "design_note": "symmetric design R=10",
+   "gap": 0.162,
+   "gap_points": 16.2,
+   "mde_arm_a_at_design": 0.042116706496520745,
+   "mde_arm_b_unpaired_at_design": 0.061281218614815385,
+   "pair_T_in_census": 472,
+   "pair_components": {
+    "run_var_1": 0.07562919498148565,
+    "run_var_2": 0.11956917663976759,
+    "task_diff_var": 0.09347826104743887
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  },
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "nano-agent|Qwen3-32B|temp=0.6",
+   "agent_2": "r2e-gym|Qwen3-32B|temp=0.6",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": false,
+   "classification": "ABOVE",
+   "classification_arm_b": "ABOVE",
+   "contrast": "cross-scaffold: Qwen3-32B at default temp",
+   "design_note": "symmetric design R=10",
+   "gap": 0.075,
+   "gap_points": 7.5,
+   "mde_arm_a_at_design": 0.025324101288139552,
+   "mde_arm_b_unpaired_at_design": 0.05600867127780605,
+   "pair_T_in_census": 485,
+   "pair_components": {
+    "run_var_1": 0.06086009859997067,
+    "run_var_2": 0.09377084897006087,
+    "task_diff_var": 0.025390512876031588
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  },
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "nano-agent|Qwen3-32B|temp=0",
+   "agent_2": "r2e-gym|Qwen3-32B|temp=0",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": false,
+   "classification": "ABOVE",
+   "classification_arm_b": "ABOVE",
+   "contrast": "cross-scaffold: Qwen3-32B at temp 0",
+   "design_note": "symmetric design R=10",
+   "gap": 0.059,
+   "gap_points": 5.900000000000002,
+   "mde_arm_a_at_design": 0.02839060653480665,
+   "mde_arm_b_unpaired_at_design": 0.056333430835093234,
+   "pair_T_in_census": 486,
+   "pair_components": {
+    "run_var_1": 0.05855921282950846,
+    "run_var_2": 0.09330045706038008,
+    "task_diff_var": 0.0361606306590034
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  },
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "nano-agent|DeepSWE-preview|temp=1",
+   "agent_2": "r2e-gym|DeepSWE-preview|temp=1",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": true,
+   "classification": "ABOVE",
+   "classification_arm_b": "BELOW",
+   "contrast": "cross-scaffold: DeepSWE-preview at default temp",
+   "design_note": "symmetric design R=10",
+   "gap": 0.03,
+   "gap_points": 3.0,
+   "mde_arm_a_at_design": 0.019318118786250005,
+   "mde_arm_b_unpaired_at_design": 0.0663081896325762,
+   "pair_T_in_census": 496,
+   "pair_components": {
+    "run_var_1": 0.0979478756939214,
+    "run_var_2": 0.09172648917957228,
+    "task_diff_var": 0.004806001638251761
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  },
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "nano-agent|DeepSWE-preview|temp=0",
+   "agent_2": "r2e-gym|DeepSWE-preview|temp=0",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": false,
+   "classification": "BELOW",
+   "classification_arm_b": "BELOW",
+   "contrast": "cross-scaffold: DeepSWE-preview at temp 0",
+   "design_note": "symmetric design R=10",
+   "gap": 0.012,
+   "gap_points": 1.1999999999999993,
+   "mde_arm_a_at_design": 0.019469772162095077,
+   "mde_arm_b_unpaired_at_design": 0.06000760404715048,
+   "pair_T_in_census": 455,
+   "pair_components": {
+    "run_var_1": 0.08194156556025389,
+    "run_var_2": 0.07708759111656108,
+    "task_diff_var": 0.00824524565430677
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  },
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "nano-agent|Devstral-2|temp=0.2",
+   "agent_2": "r2e-gym|Devstral-2|temp=0.2",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": false,
+   "classification": "ABOVE",
+   "classification_arm_b": "ABOVE",
+   "contrast": "cross-scaffold: Devstral-2 at default temp",
+   "design_note": "symmetric design R=10",
+   "gap": 0.286,
+   "gap_points": 28.6,
+   "mde_arm_a_at_design": 0.03575375120966113,
+   "mde_arm_b_unpaired_at_design": 0.06862345402660856,
+   "pair_T_in_census": 495,
+   "pair_components": {
+    "run_var_1": 0.06465403396206969,
+    "run_var_2": 0.1179135568870668,
+    "task_diff_var": 0.06317720148196701
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  },
+  {
+   "R": 10,
+   "T": 500,
+   "agent_1": "nano-agent|Devstral-2|temp=0",
+   "agent_2": "r2e-gym|Devstral-2|temp=0",
+   "arm_b_note": "Arm B MDE uses the benchmark-level per-agent components (unpaired construction); Arm B has no per-subset paired estimand in the frozen model.",
+   "arm_sensitive": false,
+   "classification": "ABOVE",
+   "classification_arm_b": "ABOVE",
+   "contrast": "cross-scaffold: Devstral-2 at temp 0",
+   "design_note": "symmetric design R=10",
+   "gap": 0.284,
+   "gap_points": 28.4,
+   "mde_arm_a_at_design": 0.036935444425653226,
+   "mde_arm_b_unpaired_at_design": 0.06844789825565034,
+   "pair_T_in_census": 495,
+   "pair_components": {
+    "run_var_1": 0.06742866233559626,
+    "run_var_2": 0.11769451522809815,
+    "task_diff_var": 0.0683935274784763
+   },
+   "source": "Bjarnason et al. (2026), Table 1 (arXiv:2602.07150v3): config mean pass@1 over the design actually used (T=500 SWE-bench Verified tasks, R=10 runs per config); values as transcribed in code/bjarnason_fallback.py and reproduced by the census anchor (deviation 0.0)."
+  }
+ ],
+ "benchmark": "B4",
+ "design_table_arm_a": {
+  "T_shared": 500,
+  "headline_pair": {
+   "n_shared_tasks_ge2": 500,
+   "pair": "nano-agent|Devstral-2|temp=0 || nano-agent|Devstral-2|temp=0.2",
+   "runs_in_shared_cells": 9917
+  },
+  "rows": {
+   "R=1": {
+    "mde_normal": 0.04608040272367377,
+    "mde_t": 0.0461706416097165
+   },
+   "R=2": {
+    "mde_normal": 0.0328275395504651,
+    "mde_t": 0.032891825459994174
+   },
+   "R=4": {
+    "mde_normal": 0.02355354053678651,
+    "mde_t": 0.023599665247830102
+   },
+   "R=8": {
+    "mde_normal": 0.017126886210236603,
+    "mde_t": 0.017160425655242326
+   },
+   "R=actual(9.92)": {
+    "mde_normal": 0.015581813353876421,
+    "mde_t": 0.015612327094999979
+   },
+   "arm": "A",
+   "pair_components": {
+    "run_var_sum": 0.1332363595357517,
+    "task_diff_var": 0.00203157595594022,
+    "task_term_paired": 0.00203157595594022
+   },
+   "required_runs_delta=0.02": {
+    "normal": 6,
+    "t": 6
+   },
+   "required_runs_delta=0.05": {
+    "normal": 1,
+    "t": 1
+   },
+   "required_runs_delta=0.1": {
+    "normal": 1,
+    "t": 1
+   }
+  }
+ },
+ "design_table_arm_b": {
+  "T_shared": 500,
+  "headline_pair": {
+   "n_shared_tasks_ge2": 500,
+   "pair": "nano-agent|Devstral-2|temp=0 || nano-agent|Devstral-2|temp=0.2",
+   "runs_in_shared_cells": 9917
+  },
+  "note": "Arm B has no cross-agent paired estimand in the frozen model (agents fitted independently); its MDE uses the unpaired construction with Arm B components (SS3.4 unpaired variant).",
+  "rows": {
+   "R=1": {
+    "mde_normal": 0.0851543081741617,
+    "mde_t": 0.08532106517838006
+   },
+   "R=2": {
+    "mde_normal": 0.07858024342691056,
+    "mde_t": 0.07873412649243697
+   },
+   "R=4": {
+    "mde_normal": 0.07507765236898878,
+    "mde_t": 0.07522467633831273
+   },
+   "R=8": {
+    "mde_normal": 0.07326358917867613,
+    "mde_t": 0.073407060682487
+   },
+   "arm": "B-unpaired",
+   "pair_components": {
+    "run_var_sum": 0.13714078696822468,
+    "task_diff_var": null,
+    "task_term_paired": 0.32478858677962347
+   },
+   "required_runs_delta=0.02": {
+    "normal": null,
+    "required_tasks_at_R8_normal": 6710,
+    "required_tasks_at_R8_t": 6736,
+    "t": null
+   },
+   "required_runs_delta=0.05": {
+    "normal": null,
+    "required_tasks_at_R8_normal": 1074,
+    "required_tasks_at_R8_t": 1078,
+    "t": null
+   },
+   "required_runs_delta=0.1": {
+    "normal": 1,
+    "t": 1
+   }
+  }
+ },
+ "falsifier": {
+  "arm_a": {
+   "interval_bca": [
+    0.635500392913644,
+    0.7843516139943334
+   ],
+   "rho": 0.7133793219461164,
+   "verdict": "SUPPORTED"
+  },
+  "arm_b": {
+   "failed_agents": [
+    "nano-agent|Devstral-2|temp=0",
+    "nano-agent|Devstral-2|temp=0.2",
+    "nano-agent|Qwen3-32B|temp=0"
+   ],
+   "interval": [
+    0.7959786818177715,
+    0.852607605852427
+   ],
+   "misfit_share_primary": 0.0,
+   "prior_sensitivity": {
+    "prior_sensitive_flag": false,
+    "rho_shift": 0.0014787696206738365
+   },
+   "rho": 0.8236693080148348,
+   "sensitivity_values": [
+    0.8251480776355087,
+    0.8428089466662454
+   ],
+   "verdict": "INDETERMINATE (fit failure, SS6.4)"
+  }
+ },
+ "pooled_rho": {
+  "arm_a": 0.7133793219461164,
+  "arm_b": 0.8236693080148348,
+  "arm_b_interval": [
+   0.7959786818177715,
+   0.852607605852427
+  ]
+ }
+}
