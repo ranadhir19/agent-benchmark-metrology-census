@@ -1,0 +1,826 @@
+%% Paper 23 -- manuscript, generic article class (production form:
+%% anonymous + TMLR style; see DECISION_PACKET.md). Target venue: TMLR.
+%% Author: Ranadhir Ghosh (sole author). Drafted 2026-11-10 from the
+%% frozen census artefacts in ../results/census/ (Arm A / Arm B JSON,
+%% design + audit tables) and ../REPORT.md. Every number in this file
+%% traces to those artefacts; the per-number map is in
+%% DATA_PROVENANCE.md in this folder.
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+\usepackage{xcolor}
+
+\newcommand{\sT}{\sigma^2_{\mathrm{task}}}
+\newcommand{\sR}{\sigma^2_{\mathrm{run}}}
+\newcommand{\sG}{\sigma^2_{\mathrm{grader}}}
+
+\title{What a Benchmark Score Cannot Say:\\
+Variance Components and Detectability Limits on Three Agent Benchmarks}
+
+\author{Ranadhir Ghosh\\
+FIS Global, Jacksonville, FL, USA}
+
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+When two agents differ by a few points on a public benchmark, is that a
+capability difference or measurement noise? We answer with a
+pre-registered measurement study of the three public agent benchmarks
+whose repeated runs survive artefact-level ingest verification (94,555
+run outcomes; three of six candidates failed verification and were
+excluded): we decompose score variance into task-sampling and run-level
+components with two co-primary estimators --- method of moments and a
+Bayesian hierarchical model --- under a frozen rule for reporting their
+disagreement, and we convert the components into per-benchmark
+minimum-detectable-effect (MDE) design tables and an audit of published
+gaps on the two benchmarks that publish auditable ones. Run-level
+variance is 0.38--0.71 of task-sampling variance on the two benchmarks
+where the pre-registered verdict is readable, and is indeterminate,
+not small, on the third (a two-agent benchmark); the two estimators
+disagree on the level by 0.09--0.11 throughout, a disagreement we
+report rather than average away, and pooled ratios summarise wide
+per-agent spreads. Detectability, not repetition, is the binding
+constraint: on the METR task suite a five-point gap cannot be resolved
+by any number of runs at the headline design and needs 257 tasks at
+eight runs, while both of $\tau$-bench's official leaderboard gaps fall
+below the minimum detectable effect of the design that produced them.
+On the benchmarks the public record lets anyone measure, a score as
+currently reported does not carry the information needed to say
+whether the differences it advertises are real.
+\end{abstract}
+
+\noindent\textbf{Keywords:} agent evaluation; benchmark metrology;
+variance components; minimum detectable effect; reproducibility
+
+\section{Introduction}
+
+Leaderboards rank agents by point scores. A two- or three-point gap
+between adjacent entries is routinely read --- in papers, in model
+cards, and in procurement decisions --- as a capability difference.
+That reading assumes the score is a precise measurement of the agent.
+It is not obviously so: an agent benchmark score is a mean over a
+finite set of tasks, each attempted a small number of times by a
+stochastic system, and every one of those finitudes contributes
+variance that the published number does not report. One live industry
+leaderboard's methodology page states the position plainly: its
+intervals ``reflect within-run case-level sampling, not pass-to-pass
+stability'', and ``run-to-run variance is not yet measured for this
+board'' \cite{algolia2026}. The field's own systematic survey reaches
+the same conclusion at scale: across 259 studies, non-determinism is
+named an uncontrolled and unmeasured threat to benchmark conclusions
+\cite{nageshwaran2026}.
+
+The components of that unmeasured variance have each been touched
+somewhere. Miller \cite{miller2024} gives the reference treatment of
+task-sampling uncertainty for static question-answering evaluations,
+with paired comparisons and power analysis, but no run, grader, or
+environment component and nothing agentic. Bjarnason et al.\
+\cite{bjarnason2026} measure run-to-run spread on one benchmark
+(single-run pass@1 varies by 2.2--6.0 points across runs) and recommend
+power analysis, but decompose nothing and audit nothing. Zhou et al.\
+\cite{zhou2026} decompose variance on one static code benchmark into
+two components and derive a repetition ceiling; Messing
+\cite{messing2026} decomposes the uncertainty of LLM annotation
+pipelines, including interactions, but not of repeated agent runs.
+The machinery we use is standard experimental-design machinery ---
+ANOVA-style variance components in the line of Bouthillier et al.\
+\cite{bouthillier2021} and generalizability theory, and power analysis
+in the line of Card et al.\ \cite{card2020} and Miller
+\cite{miller2024} --- and we claim no novelty for it. What none of the
+works above provides --- and what a reader of a leaderboard actually
+needs --- is the three-part conjunction: a decomposition of an agent
+benchmark's score variance on genuine repeated runs, the conversion of
+those components into the smallest gap the benchmark's own design can
+detect, and an audit of the published record against that detectability
+limit. This paper provides that conjunction, under a pre-registration
+frozen before any census data was touched, on every public benchmark
+whose repeated runs survive verification at the artefact itself.
+
+The contributions are:
+
+\begin{enumerate}
+\item \textbf{A variance census with two co-primary estimators and a
+frozen disagreement rule.} Across the three benchmarks that pass
+ingest verification, the ratio of run-level to task-sampling variance
+is $\rho = 0.3767$ [0.3154, 0.4426] (METR task suite) and $0.7134$
+[0.6355, 0.7844] (SWE-bench Verified repeated-run corpus) under the
+moment estimator, with $\tau$-bench indeterminate at $0.9834$
+[0.7798, 1.2239]. The Bayesian arm reads 0.09--0.11 higher on all
+three and is formally discordant with the moment arm throughout; both
+arms are reported in full, and the verdicts are read from the arm the
+frozen threshold was defined on. Estimator disagreement at this size
+is itself a measurement result: it bounds how precisely the field's
+current tools can state the noise level of a benchmark.
+\item \textbf{Detectability tables, including the regime where runs
+cannot help.} Per benchmark, the minimum detectable effect at 80\%
+power as a function of runs and tasks, with required-runs and
+required-tasks inverses. The headline case is an impossibility, not a
+shortfall: where the task term binds, no number of runs resolves the
+gap, and the design table must say so.
+\item \textbf{An audit of published gaps against their own designs.}
+Both gaps on $\tau$-bench's official leaderboard are smaller than the
+minimum detectable effect at the design actually used; of 24 published
+contrasts on the SWE-bench Verified corpus, 18 clear their design's
+MDE, 6 fall below it, and 3 change classification with the estimator.
+One benchmark contributes no auditable gap at all, because it
+publishes none with a stated design --- a finding about reporting
+practice, reported as such.
+\end{enumerate}
+
+A note on what this paper is not. It is a measurement of published
+benchmark designs and records, not a proposal for a new benchmark, not
+a validity or shortcut analysis (a different object: bias, not
+variance \cite{zhu2025,wang2026}), and not a re-analysis of any single
+benchmark's capability claims. Its negative results --- an
+indeterminate benchmark, an empty audit leg, three excluded corpora
+--- are reported at the same prominence as its positive ones, because
+under a pre-registered design they are part of the answer.
+
+\section{The measurement problem}
+
+A published score for agent $i$ is a mean over a finite design,
+$\hat{S}_i = \frac{1}{T}\sum_j \frac{1}{R_j}\sum_r Y_{ijr}$, where $j$
+indexes tasks drawn from the benchmark's task set (size $T$), $r$
+indexes independent runs (count $R_j$), and $Y_{ijr}$ is the run
+outcome --- binary as the primary endpoint, continuous partial credit
+as secondary. Under the random-effects model $Y_{ijr} = p_{ij} +
+\varepsilon_{ijr}$, with $p_{ij}$ the agent's per-task success
+propensity, the law of total variance splits a single run's outcome
+variance, for fixed agent $i$, into named components
+(Table~\ref{tab:components}). At design level, the variance of the
+published number is approximately
+$\mathrm{Var}(\hat{S}_i) \approx \sT/T + \sR/(T\cdot R)$ (plus a grader
+analogue where identified): tasks and runs buy precision at different
+rates, and only the first term responds to a larger benchmark while
+only the second responds to repetition. A leaderboard that reports
+neither component cannot say which lever its own noise responds to
+--- or whether either lever suffices for the gaps it ranks.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+Component & Definition (per agent $i$) & Generated by \\
+\midrule
+Task sampling $\sT(i)$ & $\mathrm{Var}_j(p_{ij})$ & Which tasks are in the benchmark \\
+Run-level $\sR(i)$ & $\mathrm{E}_j[\mathrm{Var}_r(Y\mid i,j)]$ & Agent stochasticity; environment \\
+ & & non-determinism where inseparable \\
+Grader $\sG(i)$ & $\mathrm{E}[\mathrm{Var}(Y\mid \text{frozen trajectory, re-grading})]$ & Stochastic or model-based grading \\
+Environment $\sigma^2_{\mathrm{env}}(i)$ & $\mathrm{E}[\mathrm{Var}(Y\mid \text{frozen policy and grading})]$ & Live-environment drift \\
+\bottomrule
+\end{tabular}
+\caption{The components of a benchmark score's variance. The
+environment component is counted within the run-level component
+wherever a corpus cannot identify it separately (refinement R1,
+Section~\ref{sec:design}); the grader component is estimated only
+where a corpus re-grades frozen trajectories, and is otherwise an
+estimability limit, never an imputed zero.}
+\label{tab:components}
+\end{table}
+
+The falsifier statistic is the ratio $\rho = (\sR + \sG)/\sT$, pooled
+across agents with equal weights, per benchmark. In every corpus this
+census could measure, $\sG$ is zero by construction (programmatic
+grading, no re-grades), so the estimated numerator is the run-level
+component alone; $\rho$ is written in its general form because the
+estimand, frozen before the census, is defined for judged benchmarks
+too --- and on judged benchmarks it remains unmeasured, here and, to
+our knowledge, everywhere (Section~\ref{sec:limits}). The thesis of
+this paper --- that single-run scores are not as reliable as the
+field's usage assumes --- dies, by the pre-registered criterion, if
+$\rho < 0.10$ on a set of at least three benchmarks with genuine
+repeated runs. The threshold is deliberately ungenerous to the thesis:
+run noise one-tenth the size of task noise would already vindicate
+current practice.
+
+\section{Design: a pre-registered census}
+\label{sec:design}
+
+\subsection{Freezing, and what was frozen}
+
+The full design --- estimands, selection rule, falsifier, estimators,
+diagnostics, and the disagreement rule below --- was frozen on
+2026-10-31 (addendum timestamp 2026-10-31T16:00:07Z) in a SHA-256 hash
+chain, before any census data was downloaded, ingested, or computed
+on, and before the model-based arm's code existed. The bounded pilot
+that preceded it (one agent on one benchmark, $\rho = 0.245$, 95\% CI
+[0.134, 0.397]) was itself run under a pre-registration frozen
+2026-10-30; its reading is indicative only, since the falsifier's
+verdict requires the full set. Two clarifications were approved with
+the investigation packet and carried into the freeze verbatim:
+\textbf{R1} --- where a corpus cannot separately identify the
+environment component, it is counted within the run-level component
+and the inseparability reported as an estimability limit; the same
+treatment applies to the grader component where no re-grading exists
+(it is then either zero by construction, for deterministic
+programmatic grading, stated as such, or not identified). Amendments
+to any frozen quantity would have required a new frozen amendment
+before the affected outcomes were examined; none was made.
+
+\subsection{The census set: selection and ingest verification}
+
+A benchmark enters the set if and only if (a) genuine repeated runs
+($n_{ij} \geq 2$ for a substantial share of agent$\times$task cells)
+are publicly available at run level, (b) outcomes are binary or
+binarisable without judgement calls, and (c) task identities are
+stable across runs. Six candidates were carried into the census. Each
+was then subjected to \emph{ingest verification}: the outcome-bearing
+files must be enumerated and parsed at the artefact itself, their
+counts reconciled against the corpus's stated design, and the licence
+permitting research reuse confirmed. Repository existence is not data
+presence --- a rule this programme learned before the census, when a
+headline 2026 result in this exact field advertised a public outcome
+tensor that its repository does not contain at any ref (the kill is
+recorded in the replication record; that work's numbers are cited in
+this paper only as its authors' claims, never as verified).
+
+Three candidates pass (Table~\ref{tab:census}); three fail, and the
+failures are findings:
+
+\begin{itemize}
+\item \textbf{B2 (HAL generalist traces): FAIL.} The dataset returns
+HTTP 401 at census time across its page, file tree, and file-resolve
+endpoints; the outcome files (encrypted archives) can be neither
+enumerated nor parsed.
+\item \textbf{B6 (HAL CORE-Bench): FAIL.} The same access failure;
+its frozen ``re-verified at census'' repeat-structure check is
+therefore impossible.
+\item \textbf{B5 (de la Rubia \& Pafka coding-agent runs): FAIL on the
+selection legs.} The corpus is present and MIT-licensed (468 run
+records), but its outcome is a continuous holdout AUC with no
+pre-stated binary bar, and it contains exactly one task, so the task
+component has no population to estimate over.
+\end{itemize}
+
+The passing set is exactly the pre-registered floor of three. That
+thinness is itself a result about the field's data practices: of six
+candidate benchmarks chosen \emph{because} they advertise repeated
+runs, half cannot support the measurement, two of them because
+advertised-open data is not, at the artefact, open.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Benchmark & Outcomes & Agents & Tasks & Cells $n\geq2$ \\
+\midrule
+B1: METR task suite (HCAST + RE-Bench) & 39,363 & 52 & 177 & 0.979 \\
+B3: $\tau$-bench (retail + airline) & 1,980 & 2 & 165 & 1.000 \\
+B4: Bjarnason et al.\ corpus (SWE-bench Verified) & 53,212 & 12 & 500 & 0.991 \\
+\bottomrule
+\end{tabular}
+\caption{The census set. B4's agents are agent configurations (two
+scaffolds $\times$ three models $\times$ two temperatures, not all
+cells present). B1 has 51 estimable agents; one (gpt2) has no repeated
+cells and is excluded by the $n_{ij}\geq2$ rule. In B1, 108 identical
+duplicate run records were counted once and 308 conflicting re-listings
+excluded, both logged in the ingest ledger.}
+\label{tab:census}
+\end{table}
+
+\subsection{Anchors}
+
+Before any variance estimate from a benchmark is trusted, a
+published-style score is recomputed from the raw run-level records two
+independent ways, with a record-count cross-check. B1's estimates
+reproduce the sealed pilot artefact bit-for-bit on overlapping slices
+(maximum absolute difference 0.0); B4's per-configuration means
+reproduce the source artefact to $1.4\times10^{-14}$; B3's two
+published contrasts are reproduced by the census corpus itself (its
+trajectories are the leaderboard runs). One discrepancy is on record:
+the pilot document's printed slice table is not reproducible from its
+sealed artefact; the census anchors on the artefact, and the printed
+table stands as an uncorrected reporting error in the frozen document.
+The frozen thresholds are design constants and are unaffected.
+
+\subsection{Two co-primary arms, and the disagreement rule}
+
+\textbf{Arm A (method of moments)} estimates the components without
+distributional assumptions: within-cell variance
+$s^2_{ij} = \frac{n_{ij}}{n_{ij}-1}\hat{p}_{ij}(1-\hat{p}_{ij})$,
+averaged with $n_{ij}$ weights for $\sR$; $\sT$ by the standard ANOVA
+moment correction (observed spread of cell means minus its expected
+sampling inflation, truncated at zero with the truncation reported).
+Uncertainty is by cluster bootstrap over tasks ($B = 2{,}000$), with
+BCa intervals reported throughout. One methodological deviation is on
+record here rather than repaired silently: the frozen registration
+specifies percentile bootstrap intervals; the census reports BCa. Both
+interval types are deposited in the artefacts; the fresh-tester audit
+of this census verified that the percentile intervals yield identical
+verdicts and identical disagreement-rule outcomes, so no finding in
+this paper depends on the substitution. \textbf{Arm B (Bayesian partial pooling)} fits, per
+agent, a logistic random-effects model
+$\mathrm{logit}(p_{ij}) = \mu_i + v_{ij}$, $v_{ij} \sim
+\mathrm{Normal}(0, \tau_i)$, with priors $\mu_i \sim \mathrm{Normal}(0,
+2.5^2)$ and $\tau_i \sim \mathrm{HalfNormal}(0,1)$, and derives the
+same probability-scale estimands per posterior draw, so both arms
+estimate the same quantities. A continuous-outcome arm (LMM on the
+original scale) is secondary in both. Sampler: NUTS, 4 chains, 2,000
+warm-up + 2,000 draws, target acceptance 0.95. Diagnostics
+($\hat{R} \leq 1.01$, bulk/tail ESS $\geq 400$, zero divergences,
+posterior predictive checks) carry frozen consequences: exactly one
+remediation at stricter settings, then FAILED, recorded and never
+dropped. A pre-specified prior-sensitivity refit (widened priors) is
+always reported alongside.
+
+Neither arm may be picked after results are seen, so the freeze
+specifies the \textbf{disagreement rule} in advance. The arms
+materially disagree on a benchmark if (a) the pooled $\rho$ points
+differ by more than 0.05, (b) the two 95\% intervals lie on opposite
+sides of the 0.10 falsifier threshold, or (c) a pooled E1/E2 point
+estimate differs by a factor outside $[2/3, 1.5]$. On material
+disagreement: both arms are reported side-by-side in full, the
+benchmark is flagged DISCORDANT, and the formal verdict is read from
+Arm A alone --- because the falsifier, its threshold, and R1 were
+frozen in moment-estimator terms, and re-basing a frozen threshold
+onto a model-based scale would move the bar. Criterion (c), we record
+here, turned out not to be evaluable for this census: the frozen Arm B
+pooled artefact carries $\rho$ only, with no pooled components, so no
+factor is computed rather than estimated post hoc. That is a
+limitation of the frozen artefact set, stated rather than repaired.
+
+\subsection{Detectability and the audit}
+
+For two agents compared on the same task set (the paired design
+leaderboards actually use), $\mathrm{SE}_{\mathrm{diff}}(R) =
+\sqrt{\sigma^2_{\mathrm{task,diff}}/T +
+(\sR(A)+\sR(B))/(T\cdot R)}$ and the minimum detectable effect at
+two-sided $\alpha = 0.05$, power 0.80 is $\mathrm{MDE}(R) = 2.802 \cdot
+\mathrm{SE}_{\mathrm{diff}}(R)$. The inverse, $R_{\mathrm{required}}
+(\delta)$, has an honest edge case: if its denominator is
+non-positive, \emph{no number of runs suffices} and the table reports
+$T_{\mathrm{required}}$ at the benchmark's actual $R$ instead. That
+edge case is a result, not an error. Arm B's MDE construction is
+unpaired (its frozen model carries no per-pair estimand); both arms'
+tables are reported, and rows whose audit classification flips between
+arms are flagged arm-sensitive, never resolved by choosing an arm.
+The audit (E6) classifies each published pairwise gap that can be
+sourced to the benchmark's own publication or official leaderboard ---
+with the gap, and the $T$ and $R$ of the design actually used,
+recorded --- against the MDE at that design. No gap is reconstructed,
+estimated, or invented where no published value can be sourced. The
+audit is deep rather than broad by design: it asks of each gap the
+strongest question (does it clear its own benchmark's detectability
+limit?) over few benchmarks, rather than a weaker question over many.
+
+\section{Results}
+
+\subsection{The falsifier verdicts}
+
+Table~\ref{tab:verdicts} gives both arms, side-by-side as the frozen
+rule requires. The formal verdicts, read from Arm A: \textbf{B1
+SUPPORTED} ($\rho = 0.3767$ [0.3154, 0.4426]); \textbf{B3
+INDETERMINATE} ($\rho = 0.9834$ [0.7798, 1.2239]); \textbf{B4
+SUPPORTED} ($\rho = 0.7134$ [0.6355, 0.7844]). No benchmark is
+refuted: wherever the verdict is readable, run-level variance is
+between roughly two-fifths and seven-tenths of task-sampling variance
+--- four to seven times the level at which the thesis would have died.
+B1's continuous secondary endpoint corroborates its binary primary
+($\rho = 0.4350$ [0.3657, 0.5102]).
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{@{}lllll@{}}
+\toprule
+Benchmark & Arm A $\rho$ (BCa 95\%) & Arm A & Arm B $\rho$ (95\% CrI) & Arm B \\
+\midrule
+B1 (METR) & 0.3767 [0.3154, 0.4426] & SUPPORTED & 0.4709 [0.4537, 0.4886] & SUPPORTED$^\dagger$ \\
+B3 ($\tau$-bench) & 0.9834 [0.7798, 1.2239] & INDET. & 1.0823 [0.9200, 1.2741] & INDET. \\
+B4 (Bjarnason) & 0.7134 [0.6355, 0.7844] & SUPPORTED & 0.8237 [0.7960, 0.8526] & INDET.$^\ddagger$ \\
+\bottomrule
+\end{tabular}
+\caption{Falsifier verdicts, both arms. $^\dagger$B1 Arm B carries the
+prior-sensitivity flag (Section~\ref{sec:discord}). $^\ddagger$B4 Arm
+B's indeterminacy is a fit-failure verdict under the frozen rule
+(Section~\ref{sec:fits}), not an evidence verdict; its pooled point
+covers the 9 agents whose primary fits passed. Formal verdicts are
+read from Arm A alone under the frozen disagreement rule; all three
+benchmarks are DISCORDANT on criterion (a).}
+\label{tab:verdicts}
+\end{table}
+
+B3's indeterminacy deserves plain statement, because it is the kind of
+result a less disciplined write-up would round into support. With two
+agents, the pooled estimate rests on a cross-fitted pair ratio; its
+point estimates sit at or above $\rho = 1$ --- run variance comparable
+to or larger than task-sampling variance --- but the frozen SUPPORTED
+clause requires the interval to lie entirely inside the definitional
+range (0, 1), which intervals crossing 1 fail. The frozen rules
+therefore record indeterminate. That is a precision statement, not a
+weak effect, and it is also a statement about $\tau$-bench's published
+design: a two-agent repeated-run corpus cannot certify the quantity
+its leaderboard most needs. Per-agent readings underline the spread
+the pooled numbers summarise: within B1, per-agent $\rho$ runs from
+0.15 to 15.6 (median 0.35; the maximum is a near-degenerate
+low-task-variance agent, reported in the artefacts, not trimmed), and
+B3's two agents read 0.93 and 1.05 individually.
+
+The grader component is an estimability limit throughout: no corpus
+in the set re-grades frozen trajectories, and grading in all three is
+programmatic, so E3 is zero by construction in all three --- stated,
+not estimated. Nothing in this census measures grader variance on
+judged benchmarks; Section~\ref{sec:limits} returns to this.
+
+\subsection{The disagreement, reported}
+\label{sec:discord}
+
+The disagreement rule fired on criterion (a) for all three benchmarks:
+$|\Delta\rho| = 0.0942$ (B1), $0.0989$ (B3), $0.1103$ (B4). Criterion
+(b) fired nowhere --- every interval in both arms lies entirely above
+the 0.10 threshold, so the arms never disagree about which side of the
+falsifier the evidence sits on. They disagree about the level, by
+about a tenth of the task component, consistently in one direction
+(the model arm reads higher). We do not resolve this. The
+registration names candidate causes --- sparse cells, prior influence
+at the sensitivity refit, model misfit --- and forbids post-hoc
+resolution; what can be said from the record is where each flag sits.
+B1's Arm B carries the prior-sensitivity flag: widening the priors
+moves its pooled $\rho_B$ by 0.0748, above the 0.05 flag threshold.
+The caveat that travels with that flag is that the widened-prior pool
+covers only 28 of 51 agents (23 sensitivity fits failed the frozen
+diagnostics), so the shift mixes a prior effect with an agent-set
+effect, and the frozen construction does not decompose the two. B3's
+corresponding shift is 0.0499 --- below the flag by 0.0001, recorded
+as borderline, not flagged. B4's is 0.0015, no flag. For a reader who
+wants one number: the honest one-number summary of this census is not
+a number but a range with a rule --- the moment arm's reading, the
+model arm's reading 0.09--0.11 higher, and the pre-registered reason
+the formal verdict follows the former.
+
+\subsection{Fit accounting}
+\label{sec:fits}
+
+Arm B's frozen list is 297 fits. Final tally: \textbf{246 PASS, 12
+REMEDIATED\_PASS, 39 FAILED, 0 FLAGGED}. Every failure followed the
+frozen ladder exactly and is recorded in its fit file with
+first-attempt and remediation diagnostics. Two clusters matter. In
+B1, 23 of 51 widened-prior sensitivity fits failed (Section~\ref{sec:discord}),
+and 2 of 51 primary fits failed (davinci\_002,
+gpt\_3\_5\_turbo\_instruct --- neither a headline agent; 3.9\% $<$
+25\%, so the Arm B verdict stands; misfit share 0.0196). In B4, the
+primary fits for \emph{both} headline-pair configurations
+(Devstral-2 at temperatures 0 and 0.2) and for Qwen3-32B at
+temperature 0 failed on bulk effective sample size (359.6 falling to
+277.7 after remediation, against the 400 bar; $\hat{R} \approx$
+1.005--1.007; zero divergences throughout). Under the frozen
+headline-failure rule, B4's Arm B verdict is therefore indeterminate
+regardless of its pooled point. We regard the refusal to rescue these
+fits --- no third attempt, no relaxed diagnostic, no model change ---
+as part of the method, not an execution shortcoming: a metrology
+paper that quietly re-tunes its own instrument until the readings
+agree would be making the field's mistake at one remove.
+
+\subsection{Detectability: what the designs can resolve}
+
+Table~\ref{tab:mde} gives the moment arm's paired-design MDEs for each
+benchmark's headline pair; the model arm's unpaired tables (uniformly
+larger, since they cannot exploit shared tasks) are in the deposited
+artefacts and summarised in the text where they change a conclusion.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{@{}lccccccl@{}}
+\toprule
+Benchmark (headline $T$) & $R{=}1$ & $R{=}2$ & $R{=}4$ & $R{=}8$ & $R_{\mathrm{actual}}$ & $\delta{=}0.05$ needs & $\delta{=}0.02$ needs \\
+\midrule
+B1: METR ($T{=}163$) & 0.1045 & 0.0832 & 0.0702 & 0.0627 & 0.0605 ($R{\approx}10.9$) & 257 tasks @ $R{=}8$ & 1,603 tasks @ $R{=}8$ \\
+B3: $\tau$-bench ($T{=}165$) & 0.1243 & 0.0981 & 0.0820 & 0.0725 & 0.0758 ($R{=}6$) & 348 tasks @ $R{=}8$ & 2,171 tasks @ $R{=}8$ \\
+B4: Bjarnason ($T{=}500$) & 0.0461 & 0.0328 & 0.0236 & 0.0171 & 0.0156 ($R{\approx}9.9$) & $R{=}1$ & $R{=}6$ \\
+\bottomrule
+\end{tabular}
+\caption{Minimum detectable effects (score points, normal-critical
+values; $t$-critical values are within 0.001 throughout and change no
+verdict) for the headline pair of each benchmark, paired design, Arm
+A. ``Needs'' columns give the binding resource: where runs cannot
+reach $\delta$ at the headline $T$, the required task count at $R=8$;
+where they can, the required runs at the headline $T$. A 10-point gap
+needs only $R = 2$ on B1 and B3.}
+\label{tab:mde}
+\end{table}
+
+Read B1's row as the paper's central practical claim. Going from one
+run to the $\approx$11 runs actually used buys a factor of 1.7 in
+detectability (0.1045 to 0.0605) --- and then the curve is spent: at
+$R = 8$ the MDE is 0.0627, and no further repetition moves it
+materially, because the remaining variance is the task term, which
+repetition does not touch. A five-point gap --- larger than most
+adjacent leaderboard gaps --- is simply not resolvable on this design;
+resolving it is a task-set decision (257 tasks at $R = 8$), not a
+compute decision. The statement is a consequence of the measured
+components under the stated paired design model, not an empirical
+impossibility claim about METR scores in general; and because the two
+arms' MDE constructions differ (Arm A's is paired, Arm B's unpaired),
+their tables are not two estimates of one quantity --- Arm B's larger
+values are what the same components imply when shared tasks cannot be
+exploited, and the audit reports both rather than blending them. B3 is worse in the same way (348 tasks needed, on a
+165-task benchmark). B4 inverts the pattern for an instructive reason:
+its headline pair is one model at two temperatures, whose
+task-difference variance is 0.0020 --- two orders below B1's 0.0609 ---
+so runs bind and small gaps are reachable ($R = 6$ for two points).
+Detectability is a property of the pair and the design, not of the
+benchmark's size or budget; it has to be computed, per comparison, from
+measured components. At present it is computed by no one.
+
+\subsection{The audit}
+
+\textbf{B3 (2 rows).} $\tau$-bench's official leaderboard reports
+pass$^1$ for gpt-4o and claude-3.5-sonnet on retail (0.604 vs 0.692,
+gap 0.088) and airline (0.420 vs 0.460, gap 0.040), from designs of
+$T = 115$, $R = 4/8$ and $T = 50$, $R = 4/8$ respectively (the
+leaderboard values equal the census corpus's own pass$^1$: these are
+the leaderboard runs). The MDEs at those designs are 0.0927 and
+0.1412. \textbf{Both published gaps are below the minimum detectable
+effect of the design that produced them} --- under the moment arm, and
+identically under the model arm (MDEs 0.1383 and 0.2097), so the
+classification is not arm-sensitive. The retail gap misses its MDE by
+0.005: close enough that a slightly larger trial count would have
+resolved it, which is precisely the kind of statement a design table
+exists to make before, not after, publication.
+
+\textbf{B4 (24 rows).} Of the 24 contrasts in the source paper's
+Table 1, at the design actually used ($T = 500$, $R = 10$): 18 are
+above their MDE under both arms; 6 are below under both --- four
+near-zero temperature contrasts (gaps 0.000--0.016 against MDEs
+0.0148--0.0202), a same-temperature model pair on one scaffold (0.005
+vs 0.0359), and a cross-scaffold gap (0.012 vs 0.0195); and 3 are
+arm-sensitive, above under the moment arm and below under the model
+arm (gaps 0.030--0.040). The corpus's headline claims --- model
+differences of 0.43--0.47 --- clear their MDEs by an order of
+magnitude. A benchmark whose own authors publish repeated runs is, on
+this evidence, a benchmark whose headline claims mostly survive their
+measurement uncertainty; the failures concentrate exactly where a
+reader would hope an audit looks: in the small contrasts a table
+invites but its design cannot support.
+
+\textbf{B1 (0 rows).} No pairwise gap could be sourced to METR's own
+publications with both a numeric value and the design's $(T, R)$:
+METR publishes time horizons and bucketed success rates, not overall
+pairwise gaps at a stated design. No gap was reconstructed (the frozen
+rule forbids it). The empty leg is reported as a finding about
+reporting practice: the benchmark with the richest public run-level
+record publishes no gap in a form whose detectability can even be
+assessed.
+
+\section{Discussion}
+
+\textbf{What changes for a benchmark maintainer.} Three practices,
+each a direct consequence of a table above. (1) Publish the components,
+or the run-level records from which they are computed: a score without
+its $\sT$ and $\sR$ is a measurement without an instrument reading.
+(2) State the MDE next to the gaps a leaderboard advertises, at the
+design actually used; the $\tau$-bench retail gap shows the cost of
+not doing so is not hypothetical. (3) When a target gap is set ---
+``we want to resolve three points'' --- compute which resource binds
+before spending on the other: on two of our three benchmarks the
+binding resource is tasks, and repetition budgets spent past $R
+\approx 4$--$8$ buy almost nothing.
+
+\textbf{What changes for a reader.} A gap below its design's MDE is
+not evidence of equality; it is an absence of evidence, and the two
+readings license opposite decisions. The audit's arm-sensitive rows
+add a second caution: for gaps within a factor of about two of the
+MDE, the classification itself can depend on the estimator, which is
+an argument for reporting both estimators' design tables --- or for
+treating near-MDE gaps as unresolved by construction.
+
+\textbf{Relation to the nearest work.} Zhou et al.\ \cite{zhou2026}
+reach a kindred conclusion --- repetition buys little --- on one
+static code benchmark, via a two-component generalizability
+decomposition and a repetition ceiling. Our design tables say why, in
+a form that survives the change of setting: repetition buys little
+\emph{when the task term binds}, and whether it binds is a measurable
+property of the pair (B4's temperature pair is the counterexample
+where repetition is exactly the right spend). We could not verify
+Zhou et al.'s numbers: their advertised outcome tensor is absent from
+their repository at every ref, and we cite their results as their
+claims, with the data-availability finding on record. That finding
+is, in miniature, this paper's ingest rule and its B2/B6 exclusions
+writ large: in this field, at this moment, \emph{advertised openness
+is not evidence of openness}, and any metrology that skips
+artefact-level verification inherits the error. Messing
+\cite{messing2026} shows interaction terms are real in LLM pipeline
+uncertainty; we do not model facet interactions, and record that as a
+limitation rather than absorbing it silently. Miller
+\cite{miller2024} remains the reference for the task component alone;
+the present results are what that framework cannot see, because its
+designs have no repeated runs to see it with.
+
+\section{Limitations}
+\label{sec:limits}
+
+\begin{enumerate}
+\item \textbf{Three benchmarks, at the floor.} The passing set is the
+pre-registered minimum. The benchmarks differ in kind (a task suite, a
+tool-agent benchmark, a code benchmark's repeated-run corpus), which
+supports the conjunction's generality argument, but three is three:
+claims are stated per benchmark and the cross-benchmark claim is the
+narrow one --- the falsifier's set-level reading --- not a universal
+law of agent benchmarks.
+\item \textbf{One benchmark has two agents.} B3's pooled estimate is
+intrinsically fragile (a cross-fitted pair ratio), and its
+indeterminacy is partly a consequence. We report it because excluding
+a passing benchmark after seeing its outcomes would violate the
+freeze; the same discipline that admits it also caps what it can
+certify.
+\item \textbf{The grader component is unmeasured.} E3 is zero by
+construction on programmatic grading. On judged benchmarks the grader
+component could be large (judge biases are documented
+\cite{zheng2023}); identifying it requires re-grading frozen
+trajectories with judge models --- new inference, separately priced,
+explicitly out of this study's registered scope.
+\item \textbf{No facet interactions.} Following Messing
+\cite{messing2026}, interactions between facets (e.g.\ prompt
+$\times$ judge) may contribute variance our additive split attributes
+to the named components.
+\item \textbf{Arm B's MDE is unpaired.} The frozen model arm has no
+per-pair estimand, so its design tables cannot exploit shared tasks
+and run uniformly larger; audit rows near the boundary are therefore
+arm-sensitive in a way a paired model arm would partly resolve. We
+report the asymmetry rather than repair it post hoc.
+\item \textbf{Disagreement criterion (c) was not evaluable} (frozen
+artefact carries pooled $\rho$ only), and B1's prior-sensitivity shift
+confounds prior and agent-set effects. Both are stated where the
+numbers are used.
+\item \textbf{Protocol deviations, declared.} Three are on the census
+record (repaired 2026-11-10; full entries in the census report's
+deviation section). (i) The census executed under a newer software
+stack (PyMC 5.25.1 and companions) than the frozen lockfile pins (PyMC
+5.16.2) after host rebuilds, and the deviation was not logged at the
+time; formal verdicts are read from Arm A, which is stack-insensitive
+in substance, but exact bit-reproduction of the Arm B fits from the
+deposited record is not guaranteed. (ii) Arm A reports BCa intervals
+where the registration specifies percentile bootstrap (declared in
+Section 3.3; verdicts identical under both). (iii) The SUPPORTED /
+INDETERMINATE row labels rest on a reporting taxonomy (the interval
+must lie entirely inside $(0, 1)$) that is not itself in the frozen
+registration, which freezes only the set-level falsifier; the taxonomy
+was applied consistently to all six arm--benchmark rows, and the
+set-level falsifier reading --- no benchmark refutes the thesis ---
+does not depend on it.
+\item \textbf{Static corpora.} HAL's corpus is paused and METR's
+versions evolve; the findings are statements about the benchmarks'
+published designs and records, framed as such. B4's corpus is a
+third-party repeated-run release over SWE-bench Verified tasks, not
+the benchmark's own leaderboard runs; its audit rows are that paper's
+published contrasts, labelled as such.
+\end{enumerate}
+
+\section{Conclusion}
+
+On the public record as it stands, the noise in an agent benchmark
+score is measurable, is first-order, and is mostly unreported. Run
+noise runs at two-fifths to seven-tenths of task noise where the
+verdict is readable; the designs in use cannot resolve the gaps they
+are used to advertise, and the binding constraint is usually the task
+set, not the run count; and of the benchmarks that advertise the data
+needed to check any of this, half fail verification at the artefact.
+None of these conclusions required new experiments --- only the
+decision to treat a benchmark score as a measurement, and to hold its
+reporting to a measurement's standard. The instruments are cheap,
+frozen in advance, and deposited with this paper; the design tables
+are the deliverable a maintainer can act on Monday morning.
+
+\section*{Data and code availability}
+
+All corpora are public research artefacts: the METR public run-level
+records; the $\tau$-bench official release (MIT); the Bjarnason et
+al.\ repeated-run release (CC-BY-4.0, Hugging Face
+\texttt{ASSERT-KTH/agentic-evals-artifacts}, pinned revision). The
+census code, the frozen pre-registration with its hash chain, the
+ingest ledger, all 297 fit records, and the JSON artefacts from which
+every table in this paper is drawn are deposited in the public
+replication package at
+\url{https://github.com/ranadhir19/agent-benchmark-metrology-census}
+(its root \texttt{validate.py} recomputes the headline census numbers
+from the deposited artefacts). The HAL corpora (B2/B6) could not be
+redistributed or read; their exclusion is documented in the ingest
+ledger.
+
+\section*{Declaration of competing interest}
+
+The author declares no competing interests. This research received no
+external funding.
+
+\section*{AI use disclosure}
+
+The author used Muse (Anthropic) for language editing and coding
+assistance in the preparation of this manuscript and its deposited
+artifacts. All AI-assisted material was reviewed and validated by the
+author, who takes full responsibility for the manuscript's content,
+accuracy, originality, and integrity.
+
+\begin{thebibliography}{99}
+
+\bibitem{kapoor2024} S.~Kapoor, B.~Stroebl, Z.~S.~Siegel, N.~Nadgir,
+A.~Narayanan, ``AI Agents That Matter,'' arXiv:2407.01502, 2024.
+
+\bibitem{nageshwaran2026} V.~Nageshwaran, S.~Ezekiel, T.~T.~Tran,
+V.~Lakshmi Narasimhan, ``Large language model agent evaluation and
+benchmarking: a systematic survey, meta-taxonomy, and critical
+research roadmap,'' \emph{Artificial Intelligence Review}, 2026.
+(Bibliographic details as recorded in the programme's verified
+literature review; DOI not verified.)
+
+\bibitem{gjorgjevikj2026} A.~Gjorgjevikj, B.~Korousic Seljak,
+T.~Eftimov, ``From Scores to Evidence: Robust Evaluation of Foundation
+Models,'' tutorial, NeurIPS 2026.
+
+\bibitem{bjarnason2026} B.~H.~Bjarnason, A.~Silva, M.~Monperrus, ``On
+Randomness in Agentic Evals,'' arXiv:2602.07150, 2026.
+
+\bibitem{delarubia2026} M.~de la Rubia, B.~Pafka, ``Identical Runs,
+Different Results: Benchmarking AI Coding Agents on Open-Weight
+Models,'' arXiv:2609.33812, 2026. (As recorded in the programme's
+literature review.)
+
+\bibitem{rabanser2026} S.~Rabanser, S.~Kapoor, P.~Kirgis, L.~Liu,
+S.~Utpala, A.~Narayanan, ``Towards a Science of AI Agent
+Reliability,'' arXiv:2602.16666, 2026.
+
+\bibitem{reliabilitygap2026} ``The Reliability Gap: Repeated-Trial
+Consistency and the Deployable Autonomy Horizon of Frontier AI
+Agents,'' Research Square preprint rs-11447587/v1, 2026. (Author list
+not verified.)
+
+\bibitem{miller2024} E.~Miller, ``Adding Error Bars to Evals: A
+Statistical Approach to Language Model Evaluations,''
+arXiv:2411.00640, 2024.
+
+\bibitem{bowyer2025} S.~Bowyer, L.~Aitchison, D.~Ivanova, ``Position:
+Don't Use the CLT in LLM Evals With Fewer Than a Few Hundred
+Datapoints,'' ICML 2025; arXiv:2503.01747.
+
+\bibitem{bouthillier2021} X.~Bouthillier et al., ``Accounting for
+Variance in Machine Learning Benchmarks,'' MLSys 2021;
+arXiv:2103.03098.
+
+\bibitem{agarwal2021} R.~Agarwal, M.~Schwarzer, P.~S.~Castro,
+A.~Courville, M.~G.~Bellemare, ``Deep Reinforcement Learning at the
+Edge of the Statistical Precipice,'' NeurIPS 2021.
+
+\bibitem{card2020} D.~Card, P.~Henderson, U.~Khandelwal, R.~Jia,
+K.~Mahowald, D.~Jurafsky, ``With Little Power Comes Great
+Responsibility,'' EMNLP 2020; arXiv:2010.06595.
+
+\bibitem{kapoor2025hal} S.~Kapoor et al., ``Holistic Agent
+Leaderboard: The Missing Infrastructure for AI Agent Evaluation,''
+arXiv:2510.11977, 2025.
+
+\bibitem{yao2024} S.~Yao, N.~Shinn, P.~Razavi, K.~Narasimhan,
+``$\tau$-bench: A Benchmark for Tool-Agent-User Interaction in
+Real-World Domains,'' arXiv:2406.12045, 2024.
+
+\bibitem{kwa2025} T.~Kwa et al., ``Measuring AI Ability to Complete
+Long Software Tasks,'' arXiv:2503.14499, 2025.
+
+\bibitem{siegel2024} Z.~S.~Siegel, S.~Kapoor, N.~Nadgir, B.~Stroebl,
+A.~Narayanan, ``CORE-Bench: Fostering the Credibility of Published
+Research Through a Computational Reproducibility Agent
+Benchmark,'' arXiv:2409.11363, 2024.
+
+\bibitem{zhu2025} K.~Zhu et al., ``Establishing Best Practices for
+Building Rigorous Agentic Benchmarks,'' arXiv:2507.02825, 2025.
+(First author as recorded in the programme's literature review.)
+
+\bibitem{wang2026} B.~Wang, F.~Bianchi, et al., ``Automated Benchmark
+Auditing for AI Agents and Large Language Models,''
+arXiv:2605.26079, 2026.
+
+\bibitem{zheng2023} L.~Zheng et al., ``Judging LLM-as-a-Judge with
+MT-Bench and Chatbot Arena,'' arXiv:2306.05685, 2023.
+
+\bibitem{algolia2026} Algolia, ``LLM Leaderboard --- Methodology,''
+\url{https://www.algolia.com/llm-leaderboard/methodology}, accessed
+2026-10-30.
+
+\bibitem{zhou2026} Y.~Zhou, J.~Choi, J.~Yao, et al., ``How Much Can
+Repeated Running Buy? A Measure Variance Ceiling for LLM Code
+Evaluation,'' arXiv:2606.00920, 2026. (Cited as its authors' claims;
+the advertised outcome tensor is absent from the public repository ---
+see Section 3.2.)
+
+\bibitem{messing2026} S.~Messing, ``Hidden Measurement Error in LLM
+Pipelines Distorts Annotation, Evaluation, and Benchmarking,''
+arXiv:2604.11581, 2026. (First author as recorded in the programme's
+literature review.)
+
+\bibitem{demsar2006} J.~Dem\v{s}ar, ``Statistical Comparisons of
+Classifiers over Multiple Data Sets,'' \emph{Journal of Machine
+Learning Research} 7 (2006) 229--268.
+
+\bibitem{longjohn2026} J.~Longjohn, V.~Gopalan, et al.,
+``Statistical Uncertainty Quantification for Aggregate Performance
+Metrics in Machine Learning Benchmarks,'' arXiv:2501.04234. (Venue
+details as recorded in the programme's dossier.)
+
+\end{thebibliography}
+
+\end{document}

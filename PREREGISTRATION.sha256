@@ -1,0 +1,25 @@
+# PREREGISTRATION hash chain — Area 1 (agent-benchmark-metrology)
+# Chain created 2026-10-31 with the full Stage 7 freeze. Entries are append-only:
+# later entries may be added below; prior entries are never overwritten or removed.
+# Verify: sha256sum -c PREREGISTRATION.sha256  (run in this directory; comment lines are ignored by sha256sum)
+#
+# Entry 1 — pre-existing frozen texts, hashes as they stood BEFORE the Stage 7 addendum
+# (recorded 2026-10-31 to prove the addendum task left them byte-untouched):
+#   EXPERIMENTS.md — pilot pre-registration frozen 2026-10-30 (14209 bytes)
+#   SOLUTION_DESIGN.md — Stage 5 design, 2026-10-30 (12210 bytes)
+b88ace98c3d62f87ec9e4aed58b32cd82f15a7fc810b5caf237a28ecbb6abed7  EXPERIMENTS.md
+b157510b443265794c32e7398d23c98e6082aac7885217af4434c3ae4674fa1a  SOLUTION_DESIGN.md
+#
+# Entry 2 — FULL STAGE 7 PRE-REGISTRATION FREEZE
+# Frozen: 2026-10-31T16:00:07Z (2026-10-31 12:00 EDT), before any census data was downloaded, ingested, or computed
+# on, and before any Arm B (GLMM/Bayesian) code existed. Census NOT started by this freeze.
+# Authority: Decision 1 = option (ii), adopted by Ranadhir Ghosh 2026-10-31 (STATE.md gate ledger);
+# Gate 8 anchor established via the Bjarnason et al. 2026 fallback PASS (EXPERIMENTS.md S4).
+64d4aebaa65d6eb630eaadaf9116ffc9d0a2c2c22964adde2c0509f61fc6b1d6  EXPERIMENTS_ADDENDUM_STAGE7.md
+#
+# Entry 3 — MODEL-STACK LOCKFILE PIN (EXPERIMENTS_ADDENDUM_STAGE7.md SS6.3)
+# Appended 2026-10-31 at the Stage 6 return (code/glmm.py built; harness Stage D
+# Arm B planted-recovery green; validate.py OVERALL PASS 18/18 — see STATE.md).
+# Appended BEFORE any census ingest, as SS6.3 requires. Census still NOT started.
+# Path is relative to this directory, like the entries above (code/ subdir).
+3fd7a97247f0d4f64662b05ae3f9e5a3a11a7d0d5cf2659d433d9ffe414f8a90  code/requirements-lock.txt
